@@ -1,30 +1,27 @@
 package com.nast.domain.entities;
 
-import javax.persistence.Basic;
+import com.nast.domain.entities.base.BaseEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "Tag")
 public class Tag extends BaseEntity {
 
-    private String groupCode;
+    @Column(unique = true, nullable = false, length = 20)
+    private String code;
 
     private String description;
 
-    @Basic
-    @Column(nullable = false)
-    public String getGroupCode() {
-        return groupCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setGroupCode(String groupCode) {
-        this.groupCode = groupCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    @Basic
-    @Column
+
     public String getDescription() {
         return description;
     }
@@ -33,11 +30,4 @@ public class Tag extends BaseEntity {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "Tag{" +
-                "groupCode='" + groupCode + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }

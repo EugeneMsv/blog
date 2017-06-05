@@ -1,4 +1,4 @@
-package com.nast.domain.entities;
+package com.nast.domain.entities.base;
 
 public interface Persistable {
 

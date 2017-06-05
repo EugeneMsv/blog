@@ -1,10 +1,12 @@
-package com.nast.domain.entities;
+package com.nast.domain.entities.base;
 
 import javax.persistence.*;
 
 @MappedSuperclass
-public class BaseEntity implements Persistable {
+public abstract class BaseEntity implements Persistable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Transient
@@ -13,10 +15,7 @@ public class BaseEntity implements Persistable {
         return this.id != null && this.id != 0;
     }
 
-    @Id
-    @Basic
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "`id`", nullable = false)
+
     @Override
     public Long getId() {
         return this.id;
@@ -35,5 +34,11 @@ public class BaseEntity implements Persistable {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb =  new StringBuilder(getClass().getSimpleName());
+        return sb.append("{id=").append(id).append("}").toString();
     }
 }

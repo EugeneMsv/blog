@@ -3,9 +3,7 @@ package com.nast.services.impl;
 import com.nast.domain.entities.QTag;
 import com.nast.domain.entities.Tag;
 import com.nast.services.TagService;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.core.types.dsl.PathBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +14,8 @@ import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -33,7 +32,7 @@ public class TagServiceImplTest {
     }
 
     @After
-    public void end(){
+    public void end() {
         tagService.deleteAll();
     }
 
@@ -41,7 +40,7 @@ public class TagServiceImplTest {
     public void saveTag_Success() throws Exception {
         Tag saveTarget = new Tag();
         saveTarget.setDescription("Test description");
-        saveTarget.setGroupCode("19909");
+        saveTarget.setCode("19909");
         Tag saved = tagService.save(saveTarget);
         assertTrue(saved.isPersisted());
     }
@@ -50,7 +49,7 @@ public class TagServiceImplTest {
     public void doubleSaveTag_Exception() throws Exception {
         Tag saveTarget = new Tag();
         saveTarget.setDescription("Test description");
-        saveTarget.setGroupCode("19909");
+        saveTarget.setCode("19909");
         Tag saved = tagService.save(saveTarget);
         Tag saved2 = tagService.save(saveTarget);
         assertTrue(saved.isPersisted());
@@ -60,15 +59,17 @@ public class TagServiceImplTest {
     public void testQueryPredicate() {
         Tag saveTarget = new Tag();
         saveTarget.setDescription("Test description");
-        saveTarget.setGroupCode("19909");
+        saveTarget.setCode("19909");
         Tag saved = tagService.save(saveTarget);
         QTag tagQuery = QTag.tag;
         BooleanExpression expression = tagQuery.groupCode.like("199%");
         Page<Tag> tagsPage = tagService.findAll(expression, new QPageRequest(0, 20));
-        assertEquals(1,tagsPage.getNumberOfElements());
+        assertEquals(1, tagsPage.getNumberOfElements());
         for (Tag tag : tagsPage) {
             assertEquals(saved, tag);
         }
     }
+
+
 
 }

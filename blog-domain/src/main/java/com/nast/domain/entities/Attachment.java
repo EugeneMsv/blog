@@ -1,17 +1,20 @@
 package com.nast.domain.entities;
 
-import javax.persistence.Basic;
+import com.nast.domain.entities.base.BaseEntity;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Lob;
 
+@Entity
 public class Attachment extends BaseEntity {
 
+    @Lob
+    @Column(length = 500000)
     private byte[] file;
 
     private String description;
 
-    @Lob
-    @Column(length=500000)
     public byte[] getFile() {
         return file;
     }
@@ -20,8 +23,6 @@ public class Attachment extends BaseEntity {
         this.file = file;
     }
 
-    @Basic
-    @Column
     public String getDescription() {
         return description;
     }

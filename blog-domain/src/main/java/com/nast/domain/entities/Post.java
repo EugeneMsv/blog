@@ -1,22 +1,40 @@
 package com.nast.domain.entities;
 
-import javax.persistence.*;
+import com.nast.domain.entities.base.BaseEntity;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class Post extends BaseEntity {
 
+    @Column(unique = true, length = 100)
     private String code;
 
+    @Column(nullable = false)
     private String title;
 
+    @Lob
+    @Column(nullable = false, columnDefinition = "LONGTEXT NO NULL")
     private String text;
 
-    private Tag tag;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "tags", joinColumns = @JoinColumn(name = "tags", referencedColumnName = "id"))
+    private List<Tag> tags;
 
+    @Column(nullable = false, length = 128)
     private String author;
 
-    private Attachment attachment;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "attachment", joinColumns = @JoinColumn(name = "attachments", referencedColumnName = "id"))
+    private List<Attachment> attachments;
 
+    @Enumerated(EnumType.STRING)
     private PostState state;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(unique = true, nullable = false)
+    private PostRegister register;
 
     public String getCode() {
         return code;
@@ -42,12 +60,12 @@ public class Post extends BaseEntity {
         this.text = text;
     }
 
-    public Tag getTag() {
-        return tag;
+    public List<Tag> getTags() {
+        return tags;
     }
 
-    public void setTag(Tag tag) {
-        this.tag = tag;
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public String getAuthor() {
@@ -58,17 +76,14 @@ public class Post extends BaseEntity {
         this.author = author;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "attachment", joinColumns = @JoinColumn(name = "attachment", referencedColumnName = "id"))
-    public Attachment getAttachment() {
-        return attachment;
+    public List<Attachment> getAttachments() {
+        return attachments;
     }
 
-    public void setAttachment(Attachment attachment) {
-        this.attachment = attachment;
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
     }
 
-    @Enumerated(EnumType.STRING)
     public PostState getState() {
         return state;
     }
