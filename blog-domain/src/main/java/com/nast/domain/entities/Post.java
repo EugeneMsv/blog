@@ -15,26 +15,24 @@ public class Post extends BaseEntity {
     private String title;
 
     @Lob
-    @Column(nullable = false, columnDefinition = "LONGTEXT NO NULL")
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String text;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "tags", joinColumns = @JoinColumn(name = "tags", referencedColumnName = "id"))
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Tag> tags;
 
     @Column(nullable = false, length = 128)
     private String author;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "attachment", joinColumns = @JoinColumn(name = "attachments", referencedColumnName = "id"))
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Attachment> attachments;
 
     @Enumerated(EnumType.STRING)
     private PostState state;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true, nullable = false)
-    private PostRegister register;
+    @JoinColumn(name = "postRegister", unique = true, nullable = false)
+    private PostRegister postRegister;
 
     public String getCode() {
         return code;

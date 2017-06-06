@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class PostRegister extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "register")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "postRegister")
     private Post post;
 
     private Long likes;
@@ -22,8 +22,7 @@ public class PostRegister extends BaseEntity {
 
     private String metaInfo;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "tags", joinColumns = @JoinColumn(name = "tags", referencedColumnName = "id"))
+    @OneToMany(mappedBy = "postRegister", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Commentary> commentaries;
 
 

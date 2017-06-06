@@ -21,7 +21,6 @@ public class Tag extends BaseEntity {
         this.code = code;
     }
 
-
     public String getDescription() {
         return description;
     }

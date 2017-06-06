@@ -3,10 +3,13 @@ package com.nast.domain.entities;
 import com.nast.domain.entities.base.BaseEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
-public class Commentary extends BaseEntity{
+public class Commentary extends BaseEntity {
 
     private String author;
 
@@ -15,6 +18,10 @@ public class Commentary extends BaseEntity{
     private String message;
 
     private String email;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "postRegister", nullable = false)
+    private PostRegister postRegister;
 
     public String getAuthor() {
         return author;
