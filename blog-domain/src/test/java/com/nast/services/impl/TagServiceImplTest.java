@@ -62,7 +62,7 @@ public class TagServiceImplTest {
         saveTarget.setCode("19909");
         Tag saved = tagService.save(saveTarget);
         QTag tagQuery = QTag.tag;
-        BooleanExpression expression = tagQuery.groupCode.like("199%");
+        BooleanExpression expression = tagQuery.code.like("199%");
         Page<Tag> tagsPage = tagService.findAll(expression, new QPageRequest(0, 20));
         assertEquals(1, tagsPage.getNumberOfElements());
         for (Tag tag : tagsPage) {
