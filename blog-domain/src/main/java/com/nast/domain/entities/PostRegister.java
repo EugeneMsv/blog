@@ -20,6 +20,8 @@ public class PostRegister extends BaseEntity {
 
     private LocalDateTime createdTime;
 
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String metaInfo;
 
     @OneToMany(mappedBy = "postRegister", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

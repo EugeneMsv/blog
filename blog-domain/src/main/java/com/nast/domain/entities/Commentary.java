@@ -2,15 +2,13 @@ package com.nast.domain.entities;
 
 import com.nast.domain.entities.base.BaseEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 public class Commentary extends BaseEntity {
 
+    @Column(nullable = false)
     private String author;
 
     private LocalDateTime createdTime;

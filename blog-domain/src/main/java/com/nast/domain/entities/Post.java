@@ -21,13 +21,14 @@ public class Post extends BaseEntity {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Tag> tags;
 
-    @Column(nullable = false, length = 128)
+    @Column(nullable = false)
     private String author;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Attachment> attachments;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private PostState state;
 
     @OneToOne(fetch = FetchType.LAZY)
