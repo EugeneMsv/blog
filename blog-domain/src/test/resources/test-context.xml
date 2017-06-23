@@ -19,37 +19,48 @@
         <property name="entityManagerFactory" ref="emf"/>
     </bean>
 
+    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="database" value="H2"/>
+        <property name="generateDdl" value="true"/>
+        <property name="showSql" value="true"/>
+    </bean>
     <!-- EntityManagerFactory -->
     <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <!--Поставщик данных - hibernate-->
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-        </property>
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
         <!--поиск сущностей в этом пакете-->
         <property name="packagesToScan" value="com.nast.domain.entities"/>
         <!--детали конфигурации поставщика постоянства (hibernate) -->
-        <property name="jpaProperties">
-            <props>
-                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-                <prop key="hibernate.max_fetch_depth">3</prop>
-                <prop key="hibernate.jdbc.fetch_size">50</prop>
-                <prop key="hibernate.jdbc.batch_size">10</prop>
-                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-                <prop key="hibernate.id.new_generator_mappings">${hibernate.id.new_generator_mappings}</prop>
-                <prop key="spring.jpa.hibernate.ddl-auto">${spring.jpa.hibernate.ddl-auto}</prop>
-                <prop key="spring.jpa.generate-ddl">${spring.jpa.generate-ddl}</prop>
-                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-            </props>
-        </property>
+        <!-- <property name="jpaProperties">
+             <props>
+                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                 <prop key="hibernate.max_fetch_depth">3</prop>
+                 <prop key="hibernate.jdbc.fetch_size">50</prop>
+                 <prop key="hibernate.jdbc.batch_size">10</prop>
+                 <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                 <prop key="hibernate.id.new_generator_mappings">${hibernate.id.new_generator_mappings}</prop>
+                 <prop key="spring.jpa.hibernate.ddl-auto">${spring.jpa.hibernate.ddl-auto}</prop>
+                 <prop key="spring.jpa.generate-ddl">${spring.jpa.generate-ddl}</prop>
+                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+             </props>
+         </property>-->
     </bean>
 
     <!-- Datasource. Источник данных - база MySQL -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${database.driver}" />
-        <property name="url" value="${database.url}" />
-        <property name="username" value="${database.login}" />
-        <property name="password" value="${database.password}" />
+    <!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+         <property name="driverClassName" value="${database.driver}" />
+         <property name="url" value="${database.url}" />
+         <property name="username" value="${database.login}" />
+         <property name="password" value="${database.password}" />
+     </bean>-->
+
+    <!-- Datasource. Источник данных - база H2 -->
+    <bean id="dataSourceBuilder" class="org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder">
+        <property name="type" value="H2"/>
+    </bean>
+
+    <bean id="dataSource" factory-bean="dataSourceBuilder" factory-method="build">
     </bean>
 
     <context:annotation-config/>

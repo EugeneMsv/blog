@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans profile="h2-on" xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <bean primary="true" id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="database" value="H2"/>
+        <property name="generateDdl" value="true"/>
+        <property name="showSql" value="true"/>
+    </bean>
+    <!-- EntityManagerFactory -->
+    <bean primary="true" id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--Поставщик данных - hibernate-->
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+        <!--поиск сущностей в этом пакете-->
+        <property name="packagesToScan" value="com.nast.domain.entities"/>
+    </bean>
+
+    <!-- Datasource. Источник данных - база H2 -->
+    <bean id="dataSourceBuilder" class="org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder">
+        <property name="type" value="H2"/>
+    </bean>
+
+    <bean primary="true" id="dataSource" factory-bean="dataSourceBuilder" factory-method="build"/>
+
+</beans>
