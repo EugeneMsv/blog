@@ -18,12 +18,12 @@
         <org.springframework.version>4.3.7.RELEASE</org.springframework.version>
         <spring.data.version>1.11.1.RELEASE</spring.data.version>
         <org.aspectj.version>1.7.4</org.aspectj.version>
-        <org.slf4j.version>1.7.5</org.slf4j.version>
         <hibernate.version>5.2.9.Final</hibernate.version>
         <project.source.version>1.8</project.source.version>
         <junit.version>4.12</junit.version>
         <querydsl.version>4.1.4</querydsl.version>
-        <slf4j.version>1.6.1</slf4j.version>
+        <jcl-over-slf4j.version>1.7.25</jcl-over-slf4j.version>
+        <logback-classic.version>1.2.3</logback-classic.version>
         <mysql.connector.version>6.0.6</mysql.connector.version>
         <h2.version>1.4.196</h2.version>
     </properties>
@@ -54,6 +54,12 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
                 <version>${org.springframework.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -115,8 +121,14 @@
             <!--SECONDARY-->
             <dependency>
                 <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>${slf4j.version}</version>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${jcl-over-slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback-classic.version}</version>
             </dependency>
 
             <!--TEST-->

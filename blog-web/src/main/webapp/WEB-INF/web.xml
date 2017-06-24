@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
 
- <!--   <welcome-file-list>
+    <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
--->
-  <!--  <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/config/root-context.xml</param-value>
-    </context-param>-->
 
     <!-- Описание корневого контейнера, разделяемого всеми сервлетами и фильтрами -->
     <context-param>
