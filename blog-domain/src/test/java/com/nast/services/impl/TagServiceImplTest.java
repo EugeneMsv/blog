@@ -14,10 +14,8 @@ import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:test-context.xml")
@@ -69,7 +67,6 @@ public class TagServiceImplTest {
             assertEquals(saved, tag);
         }
     }
-
 
 
 }
