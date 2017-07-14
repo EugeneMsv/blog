@@ -36,13 +36,19 @@ public class DomainEngineTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void checkTable(DatabaseMetaData metaData, String tableName) throws SQLException {
-        ResultSet tables = metaData.getTables(null, "BLOG", tableName, null);
-        assertTrue(tables.next());
-        assertFalse(tables.next());
+        ResultSet tables = metaData.getTables(null, null, tableName, null);
+        if (!tables.next()) {
+            tables = metaData.getTables(null, null, tableName.toUpperCase(), null);
+            assertTrue(tables.next());
+            assertFalse(tables.next());
+        } else {
+            assert true;
+            assertFalse(tables.next());
+        }
+
     }
 
 
