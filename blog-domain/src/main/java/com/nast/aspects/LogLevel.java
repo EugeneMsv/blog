@@ -46,8 +46,8 @@ public enum LogLevel {
         }
     };
 
-    private static final String INPUT_PATTERN = "Called {} method: {} with args: {}";
-    private static final String OUTPUT_PATTERN = " {} method: {} returned: {}";
+    private static final String INPUT_PATTERN = "Called='{}'; method='{}'; args='{}';";
+    private static final String OUTPUT_PATTERN = "Called='{}'; method='{}'; returnValue='{}';";
 
     void callLogger(Logger logger, Class<?> targetClass, String signatureName) {
         callLogger(logger, targetClass, signatureName, null);

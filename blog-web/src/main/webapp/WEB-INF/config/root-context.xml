@@ -16,7 +16,7 @@
        http://www.springframework.org/schema/data/jpa
        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <aop:aspectj-autoproxy />
+    <aop:aspectj-autoproxy/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
@@ -72,5 +72,7 @@
                       transaction-manager-ref="transactionManager"/>
 
     <import resource="mvc-config.xml"/>
+
+    <import resource="classpath*:domain-config.xml"/>
 
 </beans>

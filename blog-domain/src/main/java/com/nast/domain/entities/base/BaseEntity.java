@@ -1,6 +1,10 @@
 package com.nast.domain.entities.base;
 
+import org.springframework.util.StringUtils;
+
 import javax.persistence.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 @MappedSuperclass
 public abstract class BaseEntity implements Persistable {
@@ -38,7 +42,22 @@ public abstract class BaseEntity implements Persistable {
 
     @Override
     public String toString() {
-        StringBuilder sb =  new StringBuilder(getClass().getSimpleName());
-        return sb.append("{id=").append(id).append("}").toString();
+        try {
+            StringBuilder sb = new StringBuilder(getClass().getSimpleName());
+            sb.append("{id=").append(id).append(",");
+            for (Method method : getClass().getMethods()) {
+                if (method.getName().startsWith("get")) {
+                    sb.append(StringUtils.uncapitalize(method.getName().split("get")[1]))
+                            .append("=")
+                            .append(method.invoke(this))
+                            .append(",");
+                }
+            }
+            return sb.append("}").toString();
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException("Failed to print " + getClass());
+        }
+
+
     }
 }

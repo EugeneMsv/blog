@@ -1,6 +1,8 @@
 package com.nast.domain.entities.base;
 
-public interface Persistable {
+import java.io.Serializable;
+
+public interface Persistable extends Serializable {
 
     boolean isPersisted();
 

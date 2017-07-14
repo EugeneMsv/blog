@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 @Entity
 public class Tag extends BaseEntity {
 
+    private static final long serialVersionUID = -8593531398845228665L;
+
     @Column(unique = true, nullable = false, length = 20)
     private String code;
 
