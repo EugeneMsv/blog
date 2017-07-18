@@ -2,6 +2,7 @@ package com.nast.domain.services.specifications;
 
 import com.nast.domain.entities.QPost;
 import com.nast.domain.filters.PostFilter;
+import com.nast.domain.services.specifications.criteria.BooleanExpressionBuilder;
 import com.querydsl.core.types.Predicate;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -23,11 +24,11 @@ public final class PostSpecification {
 
     public static Predicate buildPredicate(PostFilter filter) {
         return BooleanExpressionBuilder.create(POST.isNotNull())
-                .and(filter.getAuthor(), StringUtils::isEmpty, POST.author::containsIgnoreCase)
-                .and(filter.getTitle(), StringUtils::isEmpty, POST.title::containsIgnoreCase)
-                .and(filter.getFrom(), Objects::isNull, POST.postRegister.createdTime::after)
-                .and(filter.getTo(), Objects::isNull, POST.postRegister.createdTime::before)
-                .and(filter.getTags(), CollectionUtils::isEmpty, POST.tags.any().code::in)
+                .and().value(filter.getAuthor()).checkIfNot(StringUtils::isEmpty).that(POST.author::containsIgnoreCase)
+                .and().value(filter.getTitle()).checkIfNot(StringUtils::isEmpty).that(POST.author::containsIgnoreCase)
+                .and().value(filter.getFrom()).checkIf(Objects::nonNull).that(POST.postRegister.createdTime::after)
+                .and().value(filter.getTo()).checkIf(Objects::nonNull).that(POST.postRegister.createdTime::before)
+                .and().value(filter.getTags()).checkIfNot(CollectionUtils::isEmpty).that(POST.tags.any().code::in)
                 .build();
     }
 }

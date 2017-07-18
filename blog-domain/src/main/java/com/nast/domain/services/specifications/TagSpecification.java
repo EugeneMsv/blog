@@ -2,6 +2,7 @@ package com.nast.domain.services.specifications;
 
 import com.nast.domain.entities.QTag;
 import com.nast.domain.filters.TagFilter;
+import com.nast.domain.services.specifications.criteria.BooleanExpressionBuilder;
 import com.querydsl.core.types.Predicate;
 import org.springframework.util.StringUtils;
 
@@ -20,7 +21,7 @@ public final class TagSpecification {
 
     public static Predicate buildPredicate(TagFilter filter) {
         return BooleanExpressionBuilder.create(TAG.isNotNull())
-                .and(filter.getCode(), StringUtils::isEmpty, TAG.code::containsIgnoreCase)
+                .and().value(filter.getCode()).checkIfNot(String::isEmpty).that(TAG.code::containsIgnoreCase)
                 .build();
     }
 }
