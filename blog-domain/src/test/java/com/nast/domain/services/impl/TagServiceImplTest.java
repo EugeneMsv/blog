@@ -1,9 +1,9 @@
 package com.nast.domain.services.impl;
 
-import com.nast.domain.entities.QTag;
 import com.nast.domain.entities.Tag;
+import com.nast.domain.filters.TagFilter;
 import com.nast.domain.services.TagService;
-import com.querydsl.core.types.dsl.BooleanExpression;
+import com.nast.domain.services.specifications.TagSpecification;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,9 +59,9 @@ public class TagServiceImplTest {
         saveTarget.setDescription("Test description");
         saveTarget.setCode("19909");
         Tag saved = tagService.save(saveTarget);
-        QTag tagQuery = QTag.tag;
-        BooleanExpression expression = tagQuery.code.like("199%");
-        Page<Tag> tagsPage = tagService.findAll(expression, new QPageRequest(0, 20));
+        TagFilter tagFilter = new TagFilter();
+        tagFilter.setCode("199");
+        Page<Tag> tagsPage = tagService.findAll(TagSpecification.buildPredicate(tagFilter), new QPageRequest(0, 20));
         assertEquals(1, tagsPage.getNumberOfElements());
         for (Tag tag : tagsPage) {
             assertEquals(saved, tag);
