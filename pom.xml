@@ -27,6 +27,7 @@
         <logback-classic.version>1.2.3</logback-classic.version>
         <mysql.connector.version>6.0.6</mysql.connector.version>
         <h2.version>1.4.196</h2.version>
+        <jetbrains.annotation.version>13.0</jetbrains.annotation.version>
     </properties>
 
     <dependencyManagement>
@@ -130,6 +131,12 @@
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>${logback-classic.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${jetbrains.annotation.version}</version>
             </dependency>
 
             <!--TEST-->
