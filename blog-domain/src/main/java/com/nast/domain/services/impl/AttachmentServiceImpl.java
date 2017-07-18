@@ -1,9 +1,9 @@
-package com.nast.services.impl;
+package com.nast.domain.services.impl;
 
 import com.nast.domain.entities.Attachment;
-import com.nast.repositories.BaseEntityRepository;
-import com.nast.repositories.AttachmentRepository;
-import com.nast.services.AttachmentService;
+import com.nast.domain.repositories.BaseEntityRepository;
+import com.nast.domain.repositories.AttachmentRepository;
+import com.nast.domain.services.AttachmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.nast.aspects;
+package com.nast.domain.aspects;
 
 import org.slf4j.Logger;
 

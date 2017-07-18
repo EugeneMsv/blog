@@ -1,4 +1,4 @@
-package com.nast.services.impl;
+package com.nast.domain.services.impl;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

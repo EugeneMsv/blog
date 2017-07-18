@@ -1,8 +1,8 @@
-package com.nast.services.impl;
+package com.nast.domain.services.impl;
 
 import com.nast.domain.entities.QTag;
 import com.nast.domain.entities.Tag;
-import com.nast.services.TagService;
+import com.nast.domain.services.TagService;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import org.junit.After;
 import org.junit.Before;

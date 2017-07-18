@@ -1,4 +1,4 @@
-package com.nast.aspects;
+package com.nast.domain.aspects;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

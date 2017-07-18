@@ -1,4 +1,4 @@
-package com.nast.aspects;
+package com.nast.domain.aspects;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

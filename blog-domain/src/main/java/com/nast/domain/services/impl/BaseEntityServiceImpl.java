@@ -1,7 +1,7 @@
-package com.nast.services.impl;
+package com.nast.domain.services.impl;
 
 import com.nast.domain.entities.base.BaseEntity;
-import com.nast.repositories.BaseEntityRepository;
+import com.nast.domain.repositories.BaseEntityRepository;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

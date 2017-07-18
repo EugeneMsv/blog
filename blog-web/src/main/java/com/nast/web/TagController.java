@@ -1,10 +1,10 @@
 package com.nast.web;
 
-import com.nast.aspects.LogLevel;
-import com.nast.aspects.LoggableCall;
+import com.nast.domain.aspects.LogLevel;
+import com.nast.domain.aspects.LoggableCall;
 import com.nast.domain.entities.QTag;
 import com.nast.domain.entities.Tag;
-import com.nast.services.TagService;
+import com.nast.domain.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

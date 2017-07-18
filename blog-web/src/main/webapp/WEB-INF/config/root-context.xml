@@ -68,7 +68,7 @@
     <context:component-scan base-package="com.nast"/>
 
 
-    <jpa:repositories base-package="com.nast.repositories" entity-manager-factory-ref="emf"
+    <jpa:repositories base-package="com.nast.domain.repositories" entity-manager-factory-ref="emf"
                       transaction-manager-ref="transactionManager"/>
 
     <import resource="mvc-config.xml"/>

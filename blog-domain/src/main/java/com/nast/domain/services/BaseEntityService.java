@@ -1,4 +1,4 @@
-package com.nast.services;
+package com.nast.domain.services;
 
 import com.nast.domain.entities.base.BaseEntity;
 import com.querydsl.core.types.Predicate;

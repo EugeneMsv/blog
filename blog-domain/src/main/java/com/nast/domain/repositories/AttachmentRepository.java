@@ -1,4 +1,4 @@
-package com.nast.repositories;
+package com.nast.domain.repositories;
 
 import com.nast.domain.entities.Attachment;
 

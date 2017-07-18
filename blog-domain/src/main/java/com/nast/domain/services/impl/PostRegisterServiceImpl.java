@@ -1,10 +1,9 @@
-package com.nast.services.impl;
+package com.nast.domain.services.impl;
 
 import com.nast.domain.entities.PostRegister;
-import com.nast.repositories.BaseEntityRepository;
-import com.nast.repositories.PostRegisterRepository;
-import com.nast.services.PostRegisterService;
-import com.nast.services.PostService;
+import com.nast.domain.repositories.BaseEntityRepository;
+import com.nast.domain.repositories.PostRegisterRepository;
+import com.nast.domain.services.PostRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
