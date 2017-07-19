@@ -2,7 +2,7 @@
 <web-app>
 
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>welcome.html</welcome-file>
     </welcome-file-list>
 
     <!-- Описание корневого контейнера, разделяемого всеми сервлетами и фильтрами -->
