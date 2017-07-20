@@ -28,6 +28,7 @@
         <mysql.connector.version>6.0.6</mysql.connector.version>
         <h2.version>1.4.196</h2.version>
         <jetbrains.annotation.version>13.0</jetbrains.annotation.version>
+        <bundle.resources.folder>resources/static/public/assets/**</bundle.resources.folder>
     </properties>
 
     <dependencyManagement>
@@ -172,6 +173,15 @@
                 <configuration>
                     <source>${project.source.version}</source>
                     <target>${project.source.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <packagingIncludes>WEB-INF/**,*.html, ${bundle.resources.folder}</packagingIncludes>
                 </configuration>
             </plugin>
         </plugins>

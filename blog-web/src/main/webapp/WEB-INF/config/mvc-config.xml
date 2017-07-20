@@ -18,5 +18,5 @@
     <!-- Разрешаем использование аннотаций Spring MVC (то есть @Controller и.т.д) -->
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/resources/**" location="/resources/static/public/assets/"/>
 </beans>
