@@ -1,4 +1,4 @@
-package com.nast.web;
+package com.nast.web.controllers;
 
 import com.nast.domain.aspects.LoggableCall;
 import com.nast.domain.aspects.LogLevel;
