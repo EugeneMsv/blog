@@ -53,7 +53,7 @@ public final class BooleanExpressionBuilder {
     }
 
     private class ParameterImpl<T> implements Parameter<T> {
-        private Optional<T> optional;
+        private final Optional<T> optional;
 
         ParameterImpl(Optional<T> optional) {
             this.optional = optional;
@@ -88,16 +88,14 @@ public final class BooleanExpressionBuilder {
          * @return выражение
          */
         public Expression that(Function<T, BooleanExpression> expressionFunc) {
-            if (optional.isPresent()) {
-                return BooleanExpressionBuilder.this.new ExpressionImpl(expressionFunc.apply(optional.get()));
-            }
-            return BooleanExpressionBuilder.this.new ExpressionImpl(Expressions.TRUE);
+            return optional.map(t -> BooleanExpressionBuilder.this.new ExpressionImpl(expressionFunc.apply(t)))
+                    .orElseGet(() -> BooleanExpressionBuilder.this.new ExpressionImpl(Expressions.TRUE));
         }
     }
 
     public class ExpressionImpl implements Expression {
 
-        private BooleanExpression booleanExpression;
+        private final BooleanExpression booleanExpression;
 
         ExpressionImpl(BooleanExpression booleanExpression) {
             this.booleanExpression = booleanExpression;
