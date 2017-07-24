@@ -1,4 +1,4 @@
-package com.nast.domain.services.specifications.criteria;
+package com.nast.domain.specifications.criteria;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 

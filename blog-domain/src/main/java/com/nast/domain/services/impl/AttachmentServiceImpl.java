@@ -18,7 +18,7 @@ public class AttachmentServiceImpl extends BaseEntityServiceImpl<Attachment> imp
     }
 
     @Override
-    BaseEntityRepository<Attachment> getRepository() {
+    protected BaseEntityRepository<Attachment> getRepository() {
         return attachmentRepository;
     }
 }

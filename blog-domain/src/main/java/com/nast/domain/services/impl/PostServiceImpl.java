@@ -1,14 +1,11 @@
 package com.nast.domain.services.impl;
 
 import com.nast.domain.entities.Post;
-import com.nast.domain.filters.PostFilter;
 import com.nast.domain.repositories.BaseEntityRepository;
 import com.nast.domain.repositories.PostRepository;
 import com.nast.domain.services.PostService;
-import com.nast.domain.services.specifications.PostSpecification;
+import com.nast.domain.specifications.PostFilterConverter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,12 +19,8 @@ public class PostServiceImpl extends BaseEntityServiceImpl<Post> implements Post
     }
 
     @Override
-    BaseEntityRepository<Post> getRepository() {
+    protected BaseEntityRepository<Post> getRepository() {
         return postRepository;
     }
 
-    @Override
-    public Page<Post> findAll(PostFilter filter, Pageable pageable) {
-        return getRepository().findAll(PostSpecification.buildPredicate(filter), pageable);
-    }
 }

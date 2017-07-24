@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Фильтр для поиска постов
  */
-public class PostFilter {
+public class PostFilter implements Filter {
 
     private String author;
 

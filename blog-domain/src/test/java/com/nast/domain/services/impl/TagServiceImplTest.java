@@ -3,7 +3,7 @@ package com.nast.domain.services.impl;
 import com.nast.domain.entities.Tag;
 import com.nast.domain.filters.TagFilter;
 import com.nast.domain.services.TagService;
-import com.nast.domain.services.specifications.TagSpecification;
+import com.nast.domain.specifications.TagFilterConverter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,7 +61,7 @@ public class TagServiceImplTest {
         Tag saved = tagService.save(saveTarget);
         TagFilter tagFilter = new TagFilter();
         tagFilter.setCode("199");
-        Page<Tag> tagsPage = tagService.findAll(TagSpecification.buildPredicate(tagFilter), new QPageRequest(0, 20));
+        Page<Tag> tagsPage = tagService.findAll(tagFilter, new QPageRequest(0, 20));
         assertEquals(1, tagsPage.getNumberOfElements());
         for (Tag tag : tagsPage) {
             assertEquals(saved, tag);

@@ -16,12 +16,12 @@
        http://www.springframework.org/schema/data/jpa
        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <aop:aspectj-autoproxy />
+    <aop:aspectj-autoproxy/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations" value="classpath*:test.properties" />
+        <property name="locations" value="classpath*:test.properties"/>
     </bean>
 
     <!--Обеспечивает работу с транзакциями в Spring -->
@@ -67,4 +67,14 @@
 
     <jpa:repositories base-package="com.nast.domain.repositories" entity-manager-factory-ref="emf"
                       transaction-manager-ref="transactionManager"/>
+
+    <bean id="conversionService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.nast.domain.specifications.TagFilterConverter"/>
+                <bean class="com.nast.domain.specifications.PostFilterConverter"/>
+            </set>
+        </property>
+    </bean>
 </beans>

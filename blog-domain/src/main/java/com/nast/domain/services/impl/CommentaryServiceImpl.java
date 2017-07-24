@@ -18,7 +18,7 @@ public class CommentaryServiceImpl extends BaseEntityServiceImpl<Commentary> imp
     }
 
     @Override
-    BaseEntityRepository<Commentary> getRepository() {
+    protected BaseEntityRepository<Commentary> getRepository() {
         return commentaryRepository;
     }
 }

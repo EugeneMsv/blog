@@ -3,7 +3,7 @@ package com.nast.domain.filters;
 /**
  * Фильтр для поиска тегов
  */
-public class TagFilter {
+public class TagFilter implements Filter {
 
     private String code;
 

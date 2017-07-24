@@ -18,7 +18,7 @@ public class PostRegisterServiceImpl extends BaseEntityServiceImpl<PostRegister>
     }
 
     @Override
-    BaseEntityRepository<PostRegister> getRepository() {
+    protected BaseEntityRepository<PostRegister> getRepository() {
         return postRegisterRepository;
     }
 }
