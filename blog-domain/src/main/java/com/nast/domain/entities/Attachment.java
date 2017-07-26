@@ -9,6 +9,8 @@ import javax.persistence.Lob;
 @Entity
 public class Attachment extends BaseEntity {
 
+    private static final long serialVersionUID = -8412370153231420105L;
+
     @Lob
     @Column(length = 500000)
     private byte[] file;

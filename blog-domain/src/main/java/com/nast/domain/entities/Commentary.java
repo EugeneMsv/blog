@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 @Entity
 public class Commentary extends BaseEntity {
 
+    private static final long serialVersionUID = -2612882182166770506L;
+
     @Column(nullable = false)
     private String author;
 

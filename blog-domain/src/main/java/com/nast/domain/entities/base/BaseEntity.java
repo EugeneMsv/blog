@@ -43,6 +43,7 @@ public abstract class BaseEntity implements Persistable {
     @Override
     public String toString() {
         try {
+            // TODO: 26.07.2017 Временно, затем убрать рефлексию
             StringBuilder sb = new StringBuilder(getClass().getSimpleName());
             sb.append("{id=").append(id).append(",");
             for (Method method : getClass().getMethods()) {

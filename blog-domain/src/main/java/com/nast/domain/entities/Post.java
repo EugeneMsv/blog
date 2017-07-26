@@ -8,6 +8,8 @@ import java.util.List;
 @Entity
 public class Post extends BaseEntity {
 
+    private static final long serialVersionUID = -8786471757326098213L;
+
     @Column(unique = true, length = 100)
     private String code;
 
@@ -31,8 +33,7 @@ public class Post extends BaseEntity {
     @Column(nullable = false)
     private PostState state;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postRegister", unique = true, nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "post")
     private PostRegister postRegister;
 
     public String getCode() {

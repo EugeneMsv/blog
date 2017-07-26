@@ -9,8 +9,16 @@ import java.util.List;
 @Entity
 public class PostRegister extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "postRegister")
+    private static final long serialVersionUID = -1207026720655304124L;
+
+    /**
+     * Постр регистр является владельцем ссылки на пост
+     */
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "postId", unique = true, nullable = false)
     private Post post;
+
+    private String preview;
 
     private Long likes;
 
@@ -34,6 +42,14 @@ public class PostRegister extends BaseEntity {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public String getPreview() {
+        return preview;
+    }
+
+    public void setPreview(String preview) {
+        this.preview = preview;
     }
 
     public Long getLikes() {
