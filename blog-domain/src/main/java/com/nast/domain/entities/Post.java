@@ -20,7 +20,7 @@ public class Post extends BaseEntity {
     @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String text;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Tag> tags;
 
     @Column(nullable = false)
@@ -33,7 +33,7 @@ public class Post extends BaseEntity {
     @Column(nullable = false)
     private PostState state;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "post")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL)
     private PostRegister postRegister;
 
     public String getCode() {
@@ -90,5 +90,13 @@ public class Post extends BaseEntity {
 
     public void setState(PostState state) {
         this.state = state;
+    }
+
+    public PostRegister getPostRegister() {
+        return postRegister;
+    }
+
+    public void setPostRegister(PostRegister postRegister) {
+        this.postRegister = postRegister;
     }
 }

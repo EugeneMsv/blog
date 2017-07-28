@@ -14,7 +14,7 @@ public class PostRegister extends BaseEntity {
     /**
      * Постр регистр является владельцем ссылки на пост
      */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "postId", unique = true, nullable = false)
     private Post post;
 
@@ -32,7 +32,7 @@ public class PostRegister extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String metaInfo;
 
-    @OneToMany(mappedBy = "postRegister", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Commentary> commentaries;
 
 

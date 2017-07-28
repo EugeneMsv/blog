@@ -54,4 +54,13 @@ public class Commentary extends BaseEntity {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
+    public PostRegister getPostRegister() {
+        return postRegister;
+    }
+
+    public void setPostRegister(PostRegister postRegister) {
+        this.postRegister = postRegister;
+    }
 }
