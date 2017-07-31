@@ -1,9 +1,8 @@
 package com.nast.web.controllers;
 
-import com.nast.domain.aspects.LogLevel;
-import com.nast.domain.aspects.LoggableCall;
-import com.nast.domain.entities.QTag;
 import com.nast.domain.entities.Tag;
+import com.nast.domain.profiling.LogLevel;
+import com.nast.domain.profiling.LoggableCall;
 import com.nast.domain.services.TagService;
 import com.nast.web.exception.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

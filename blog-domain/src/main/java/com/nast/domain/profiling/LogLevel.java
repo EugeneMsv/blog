@@ -1,4 +1,4 @@
-package com.nast.domain.aspects;
+package com.nast.domain.profiling;
 
 import org.slf4j.Logger;
 
@@ -11,7 +11,7 @@ public enum LogLevel {
         }
 
         @Override
-        boolean isEnabled(Logger logger) {
+        public boolean isEnabled(Logger logger) {
             return logger.isTraceEnabled();
         }
     }, INFO {
@@ -21,7 +21,7 @@ public enum LogLevel {
         }
 
         @Override
-        boolean isEnabled(Logger logger) {
+        public boolean isEnabled(Logger logger) {
             return logger.isInfoEnabled();
         }
     }, DEBUG {
@@ -31,7 +31,7 @@ public enum LogLevel {
         }
 
         @Override
-        boolean isEnabled(Logger logger) {
+        public boolean isEnabled(Logger logger) {
             return logger.isDebugEnabled();
         }
     }, ERROR {
@@ -41,7 +41,7 @@ public enum LogLevel {
         }
 
         @Override
-        boolean isEnabled(Logger logger) {
+        public boolean isEnabled(Logger logger) {
             return logger.isErrorEnabled();
         }
     };
@@ -49,19 +49,19 @@ public enum LogLevel {
     private static final String INPUT_PATTERN = "Called='{}'; method='{}'; args='{}';";
     private static final String OUTPUT_PATTERN = "Called='{}'; method='{}'; returnValue='{}';";
 
-    void callLogger(Logger logger, Class<?> targetClass, String signatureName) {
+    public void callLogger(Logger logger, Class<?> targetClass, String signatureName) {
         callLogger(logger, targetClass, signatureName, null);
     }
 
-    void callLogger(Logger logger, Class<?> targetClass, String signatureName, Object[] args) {
+    public void callLogger(Logger logger, Class<?> targetClass, String signatureName, Object[] args) {
         log(logger, INPUT_PATTERN, targetClass, signatureName, args);
     }
 
-    void callLogger(Logger logger, Class<?> targetClass, String signatureName, Object proceedResult) {
+    public void callLogger(Logger logger, Class<?> targetClass, String signatureName, Object proceedResult) {
         log(logger, OUTPUT_PATTERN, targetClass, signatureName, proceedResult);
     }
 
     abstract void log(Logger logger, String pattern, Object... objects);
 
-    abstract boolean isEnabled(Logger logger);
+    public abstract boolean isEnabled(Logger logger);
 }

@@ -16,6 +16,8 @@
        http://www.springframework.org/schema/data/jpa
        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
+    <bean class="com.nast.domain.profiling.ProfilingHandlerBeanPostProcessor"/>
+
     <aop:aspectj-autoproxy/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>

@@ -30,6 +30,7 @@
         <jetbrains.annotation.version>13.0</jetbrains.annotation.version>
         <bundle.resources.folder>resources/static/public/assets/**</bundle.resources.folder>
         <commons-dbcp2.version>2.1.1</commons-dbcp2.version>
+        <commons-lang3.version>3.6</commons-lang3.version>
     </properties>
 
     <dependencyManagement>
@@ -147,6 +148,12 @@
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
                 <version>${jetbrains.annotation.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
             </dependency>
 
             <!--TEST-->

@@ -1,7 +1,7 @@
 package com.nast.web.controllers;
 
-import com.nast.domain.aspects.LoggableCall;
-import com.nast.domain.aspects.LogLevel;
+import com.nast.domain.profiling.LogLevel;
+import com.nast.domain.profiling.LoggableCall;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

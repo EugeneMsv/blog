@@ -1,4 +1,4 @@
-package com.nast.domain.aspects;
+package com.nast.domain.profiling;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -11,6 +11,10 @@ import org.springframework.stereotype.Component;
 import java.time.Duration;
 import java.time.Instant;
 
+/**
+ * Устаревший т.к. через BeanPostProcessor прирост производительности x10 при вызове методов
+ */
+@Deprecated
 @Component
 @Aspect
 public class LoggingAspect {
@@ -31,13 +35,13 @@ public class LoggingAspect {
         logBeforeMethod(pjp, loggableCall);
 
         Instant startInstant = null;
-        if (loggableCall.timeRecord()) {
+        if (loggableCall.timeRecord() && logger.isTraceEnabled()) {
             startInstant = Instant.now();
         }
 
         Object proceed = pjp.proceed();
 
-        if (loggableCall.timeRecord() && startInstant != null) {
+        if (loggableCall.timeRecord() && logger.isTraceEnabled() && startInstant != null) {
             logger.trace("Time: {}", Duration.between(startInstant, Instant.now()));
         }
 

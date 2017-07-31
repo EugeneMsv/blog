@@ -15,6 +15,14 @@ public class Tag extends BaseEntity {
 
     private String description;
 
+    public Tag() {
+    }
+
+    public Tag(String code, String description) {
+        this.code = code;
+        this.description = description;
+    }
+
     public String getCode() {
         return code;
     }
