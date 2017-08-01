@@ -1,5 +1,6 @@
 package com.nast.domain.entities.base;
 
+import org.springframework.data.domain.Persistable;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 @MappedSuperclass
-public abstract class BaseEntity implements Persistable {
+public abstract class BaseEntity implements Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +16,8 @@ public abstract class BaseEntity implements Persistable {
 
     @Transient
     @Override
-    public boolean isPersisted() {
-        return this.id != null && this.id != 0;
+    public boolean isNew() {
+        return this.id == null;
     }
 
 

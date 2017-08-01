@@ -1,6 +1,7 @@
 package com.nast.domain.services.impl;
 
 import com.nast.domain.entities.Tag;
+import com.nast.domain.filters.TagFilter;
 import com.nast.domain.profiling.Profiling;
 import com.nast.domain.repositories.BaseEntityRepository;
 import com.nast.domain.repositories.TagRepository;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Profiling(showArgs = true, timeRecord = true, showOutput = true)
 @Service
-public class TagServiceImpl extends BaseEntityServiceImpl<Tag> implements TagService {
+public class TagServiceImpl extends FilteredEntityServiceImpl<Tag, TagFilter> implements TagService {
 
     private final TagRepository tagRepository;
 

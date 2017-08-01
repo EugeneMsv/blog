@@ -20,6 +20,24 @@ public interface BaseEntityRepository<T extends BaseEntity>
      */
     <S extends T> S save(S entity);
 
+
+    /**
+     * Returns the number of entities available.
+     *
+     * @return the number of entities
+     */
+    long count();
+
+    /**
+     * Returns whether any entity  exists.
+     *
+     * @return true if any entity  exists, {@literal false} otherwise
+     */
+    default boolean exists() {
+        return count() > 0;
+    }
+
+
     /**
      * Saves all given entities.
      *

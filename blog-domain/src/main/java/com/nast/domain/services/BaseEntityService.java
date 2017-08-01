@@ -1,28 +1,59 @@
 package com.nast.domain.services;
 
 import com.nast.domain.entities.base.BaseEntity;
-import com.nast.domain.filters.Filter;
-import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
-public interface BaseEntityService<T extends BaseEntity> {
+/**
+ * Base service for all persist entities
+ *
+ * @param <E> entity type
+ */
+public interface BaseEntityService<E extends BaseEntity> {
 
-    T save(T target);
+    /**
+     * Save entity
+     *
+     * @param target entity
+     * @return saved or merged entity
+     */
+    E save(E target);
 
-    boolean exists(Filter filter);
+    /**
+     * Check for existence in persist storage
+     *
+     * @return true if exist false if not
+     */
+    boolean exists();
 
+    /**
+     * Delete entity  by id
+     *
+     * @param id entity id
+     * @throws IllegalArgumentException in case the given entity is {@literal null}
+     */
     void delete(Long id);
 
+    /**
+     * Delete all entities
+     */
     void deleteAll();
 
-    Optional<T> findOne(Filter filter);
+    /**
+     * Find entity by id
+     *
+     * @param id entity id
+     * @return optional of entity, empty if there is no such entity
+     */
+    Optional<E> findOne(Long id);
 
-    Optional<T> findOne(Long id);
-
-    Page<T> findAll(Filter filter, Pageable pageable);
-
-    Page<T> findAll(Pageable pageable);
+    /**
+     * Find all entities with given page
+     *
+     * @param pageable page descriptor
+     * @return page corresponding for pageable
+     */
+    Page<E> findAll(Pageable pageable);
 }

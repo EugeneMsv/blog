@@ -5,5 +5,5 @@ import com.nast.domain.filters.PostFilter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface PostService extends BaseEntityService<Post> {
+public interface PostService extends FilteredEntityService<Post, PostFilter> {
 }

@@ -7,6 +7,13 @@ public class TagFilter implements Filter {
 
     private String code;
 
+    public TagFilter() {
+    }
+
+    public TagFilter(String code) {
+        this.code = code;
+    }
+
     /**
      * Код
      */
