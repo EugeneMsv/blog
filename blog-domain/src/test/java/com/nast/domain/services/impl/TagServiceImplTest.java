@@ -1,6 +1,6 @@
 package com.nast.domain.services.impl;
 
-import com.nast.domain.entities.Tag;
+import com.nast.domain.entities.*;
 import com.nast.domain.filters.TagFilter;
 import com.nast.domain.services.TagService;
 import org.junit.After;
@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

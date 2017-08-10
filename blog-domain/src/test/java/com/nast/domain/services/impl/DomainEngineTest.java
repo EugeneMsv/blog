@@ -33,6 +33,7 @@ public class DomainEngineTest {
             checkTable(metaData, "commentary");
             checkTable(metaData, "post");
             checkTable(metaData, "tag");
+            checkTable(metaData, "PERSISTENT_LOGINS");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
