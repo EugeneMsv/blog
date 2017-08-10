@@ -1,5 +1,9 @@
 package com.nast.domain.services;
 
+import com.nast.domain.entities.security.User;
+
+import java.util.List;
+
 public interface UserService {
 
     User findById(int id);
@@ -15,4 +19,5 @@ public interface UserService {
     List<User> findAllUsers();
 
     boolean isUserSSOUnique(Integer id, String sso);
+}
 

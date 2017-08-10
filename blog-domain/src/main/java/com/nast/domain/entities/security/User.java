@@ -1,46 +1,36 @@
-package com.nast.domain.entities;
+package com.nast.domain.entities.security;
+
+import com.nast.domain.entities.base.BaseEntity;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name="APP_USER")
-public class User implements Serializable{
+@Table(name = "APP_USER")
+// TODO: 10.08.2017 пересмотреть и написать тесты
+public class User extends BaseEntity {
 
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
-
-    @NotEmpty
-    @Column(name="SSO_ID", unique=true, nullable=false)
+    @Column(name = "SSO_ID", unique = true, nullable = false)
     private String ssoId;
 
-    @NotEmpty
-    @Column(name="PASSWORD", nullable=false)
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @NotEmpty
-    @Column(name="FIRST_NAME", nullable=false)
+    @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
-    @NotEmpty
-    @Column(name="LAST_NAME", nullable=false)
+    @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
-    @NotEmpty
-    @Column(name="EMAIL", nullable=false)
+    @Column(name = "EMAIL", nullable = false)
     private String email;
 
-    @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "APP_USER_USER_PROFILE",
-            joinColumns = { @JoinColumn(name = "USER_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
+            joinColumns = {@JoinColumn(name = "USER_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "USER_PROFILE_ID")})
     private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getSsoId() {
         return ssoId;
@@ -90,7 +80,6 @@ public class User implements Serializable{
         this.userProfiles = userProfiles;
     }
 
-    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -131,7 +120,5 @@ public class User implements Serializable{
                 + ", firstName=" + firstName + ", lastName=" + lastName
                 + ", email=" + email + "]";
     }
-
-
 
 }

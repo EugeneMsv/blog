@@ -12,7 +12,7 @@ public abstract class BaseEntity implements Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
     @Transient
     @Override

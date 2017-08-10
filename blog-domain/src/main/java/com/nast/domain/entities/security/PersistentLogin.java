@@ -1,4 +1,4 @@
-package com.nast.domain.entities;
+package com.nast.domain.entities.security;
 
 import javax.persistence.*;
 import java.io.Serializable;

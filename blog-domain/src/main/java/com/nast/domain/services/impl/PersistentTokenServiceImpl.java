@@ -1,6 +1,6 @@
 package com.nast.domain.services.impl;
 
-import com.nast.domain.entities.PersistentLogin;
+import com.nast.domain.entities.security.PersistentLogin;
 import com.nast.domain.repositories.PersistentLoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;

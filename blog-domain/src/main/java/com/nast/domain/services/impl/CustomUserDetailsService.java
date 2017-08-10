@@ -1,17 +1,18 @@
 package com.nast.domain.services.impl;
 
+import com.nast.domain.entities.security.User;
+import com.nast.domain.entities.security.UserProfile;
+import com.nast.domain.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.plugin.util.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserService userService;
 
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String ssoId) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String ssoId)
+            throws UsernameNotFoundException {
         User user = userService.findBySSO(ssoId);
         logger.info("User : {}", user);
         if (user == null) {
@@ -36,9 +38,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 true, true, true, true, getGrantedAuthorities(user));
     }
 
-
     private List<GrantedAuthority> getGrantedAuthorities(User user) {
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        List<GrantedAuthority> authorities = new ArrayList<>();
 
         for (UserProfile userProfile : user.getUserProfiles()) {
             logger.info("UserProfile : {}", userProfile);
