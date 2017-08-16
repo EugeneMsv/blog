@@ -34,7 +34,20 @@ public enum LogLevel {
         public boolean isEnabled(Logger logger) {
             return logger.isDebugEnabled();
         }
-    }, ERROR {
+    },
+    WARN {
+        @Override
+        void log(Logger logger, String pattern, Object... objects) {
+            logger.warn(pattern, objects);
+        }
+
+        @Override
+        public boolean isEnabled(Logger logger) {
+            return logger.isWarnEnabled();
+        }
+    },
+
+    ERROR {
         @Override
         void log(Logger logger, String pattern, Object... objects) {
             logger.error(pattern, objects);

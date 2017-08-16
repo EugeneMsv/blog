@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Table(name = "USER_PROFILE")
 public class UserProfile extends BaseEntity {
 
-
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPE", nullable = false, unique = true)
     private UserProfileType type;

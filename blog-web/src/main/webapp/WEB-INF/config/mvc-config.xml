@@ -13,7 +13,7 @@
     <beans:bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/views/"/>
-        <beans:property name="suffix" value=".html"/>
+        <beans:property name="suffix" value=".jsp"/>
     </beans:bean>
     <!-- Разрешаем использование аннотаций Spring MVC (то есть @Controller и.т.д) -->
     <mvc:annotation-driven/>
