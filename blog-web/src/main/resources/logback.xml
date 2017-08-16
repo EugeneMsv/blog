@@ -9,6 +9,7 @@
     </appender>
 
     <logger name="com.nast" level="TRACE" />
+    <logger name="org.springframework.beans.TypeConverterDelegate" level="ERROR" />
 
     <root level="debug">
         <appender-ref ref="STDOUT"/>

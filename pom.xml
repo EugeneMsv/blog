@@ -225,6 +225,7 @@
                 <version>2.2</version>
                 <configuration>
                     <packagingIncludes>WEB-INF/**,*.html, ${bundle.resources.folder}</packagingIncludes>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
         </plugins>
