@@ -2,5 +2,5 @@ package com.nast.domain.repositories;
 
 import com.nast.domain.entities.Commentary;
 
-public interface CommentaryRepository extends BaseEntityRepository<Commentary> {
+public interface CommentaryRepository extends PersistedEntityRepository<Commentary> {
 }

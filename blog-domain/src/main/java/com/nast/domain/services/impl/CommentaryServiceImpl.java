@@ -1,14 +1,14 @@
 package com.nast.domain.services.impl;
 
 import com.nast.domain.entities.Commentary;
-import com.nast.domain.repositories.BaseEntityRepository;
+import com.nast.domain.repositories.PersistedEntityRepository;
 import com.nast.domain.repositories.CommentaryRepository;
 import com.nast.domain.services.CommentaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CommentaryServiceImpl extends BaseEntityServiceImpl<Commentary> implements CommentaryService {
+public class CommentaryServiceImpl extends AbstractCrudServiceImpl<Commentary> implements CommentaryService {
 
     private final CommentaryRepository commentaryRepository;
 
@@ -18,7 +18,7 @@ public class CommentaryServiceImpl extends BaseEntityServiceImpl<Commentary> imp
     }
 
     @Override
-    protected BaseEntityRepository<Commentary> getRepository() {
+    protected PersistedEntityRepository<Commentary> getRepository() {
         return commentaryRepository;
     }
 }

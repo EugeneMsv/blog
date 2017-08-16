@@ -1,8 +1,8 @@
 package com.nast.domain.services.impl;
 
-import com.nast.domain.entities.base.BaseEntity;
-import com.nast.domain.entities.base.QBaseEntity;
-import com.nast.domain.repositories.BaseEntityRepository;
+import com.nast.domain.entities.base.PersistedEntity;
+import com.nast.domain.entities.base.QPersistedEntity;
+import com.nast.domain.repositories.PersistedEntityRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 // TODO: 24.07.2017 тестировать
-public abstract class BaseEntityServiceImpl<E extends BaseEntity> {
+public abstract class AbstractCrudServiceImpl<E extends PersistedEntity> {
 
-    protected abstract BaseEntityRepository<E> getRepository();
+    protected abstract PersistedEntityRepository<E> getRepository();
 
     @Transactional
     public E save(E target) {
@@ -41,6 +41,6 @@ public abstract class BaseEntityServiceImpl<E extends BaseEntity> {
 
     @Transactional(readOnly = true)
     public Page<E> findAll(Pageable pageable) {
-        return getRepository().findAll(QBaseEntity.baseEntity.isNotNull(), pageable);
+        return getRepository().findAll(QPersistedEntity.persistedEntity.isNotNull(), pageable);
     }
 }

@@ -1,12 +1,12 @@
 package com.nast.domain.entities;
 
-import com.nast.domain.entities.base.BaseEntity;
+import com.nast.domain.entities.base.PersistedEntity;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Post extends BaseEntity {
+public class Post extends PersistedEntity {
 
     private static final long serialVersionUID = -8786471757326098213L;
 

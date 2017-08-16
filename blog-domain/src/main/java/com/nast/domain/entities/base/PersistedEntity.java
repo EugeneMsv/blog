@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 @MappedSuperclass
-public abstract class BaseEntity implements Persistable<Long> {
+public abstract class PersistedEntity implements Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public abstract class BaseEntity implements Persistable<Long> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        return o != null && getClass() == o.getClass() && id.equals(((BaseEntity) o).id);
+        return o != null && getClass() == o.getClass() && id.equals(((PersistedEntity) o).id);
     }
 
     @Override

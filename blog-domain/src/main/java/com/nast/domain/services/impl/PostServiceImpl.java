@@ -2,10 +2,9 @@ package com.nast.domain.services.impl;
 
 import com.nast.domain.entities.Post;
 import com.nast.domain.filters.PostFilter;
-import com.nast.domain.repositories.BaseEntityRepository;
+import com.nast.domain.repositories.PersistedEntityRepository;
 import com.nast.domain.repositories.PostRepository;
 import com.nast.domain.services.PostService;
-import com.nast.domain.specifications.PostFilterConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,7 @@ public class PostServiceImpl extends FilteredEntityServiceImpl<Post, PostFilter>
     }
 
     @Override
-    protected BaseEntityRepository<Post> getRepository() {
+    protected PersistedEntityRepository<Post> getRepository() {
         return postRepository;
     }
 

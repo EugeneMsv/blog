@@ -1,6 +1,6 @@
 package com.nast.domain.services;
 
-import com.nast.domain.entities.base.BaseEntity;
+import com.nast.domain.entities.base.PersistedEntity;
 import com.nast.domain.filters.Filter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,7 @@ import java.util.Optional;
  * @param <T> entity type
  * @param <F> filter type
  */
-public interface FilteredEntityService<T extends BaseEntity, F extends Filter> extends BaseEntityService<T> {
+public interface FilteredEntityService<T extends PersistedEntity, F extends Filter> extends BaseEntityService<T> {
 
     /**
      * Check for existence in persist storage by filter

@@ -1,6 +1,6 @@
 package com.nast.domain.services.impl;
 
-import com.nast.domain.entities.base.BaseEntity;
+import com.nast.domain.entities.base.PersistedEntity;
 import com.nast.domain.filters.Filter;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-public abstract class FilteredEntityServiceImpl<E extends BaseEntity, F extends Filter> extends BaseEntityServiceImpl<E> {
+public abstract class FilteredEntityServiceImpl<E extends PersistedEntity, F extends Filter> extends
+        AbstractCrudServiceImpl<E> {
 
     @Autowired
     protected ConversionService conversionService;
