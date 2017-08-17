@@ -1,12 +1,12 @@
 package com.nast.domain.entities;
 
-import com.nast.domain.entities.base.PersistedEntity;
+import com.nast.domain.entities.base.Identity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class Commentary extends PersistedEntity {
+public class Commentary extends Identity {
 
     private static final long serialVersionUID = -2612882182166770506L;
 

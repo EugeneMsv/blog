@@ -1,12 +1,12 @@
 package com.nast.domain.repositories;
 
-import com.nast.domain.entities.base.PersistedEntity;
+import com.nast.domain.entities.base.Identity;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.Repository;
 
 import java.util.Optional;
 
-public interface PersistedEntityRepository<T extends PersistedEntity>
+public interface PersistedEntityRepository<T extends Identity>
         extends Repository<T, Long>, QueryDslPredicateExecutor<T> {
 
     /**

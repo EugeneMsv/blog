@@ -1,13 +1,13 @@
 package com.nast.domain.entities;
 
-import com.nast.domain.entities.base.PersistedEntity;
+import com.nast.domain.entities.base.Identity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 
 @Entity
-public class Attachment extends PersistedEntity {
+public class Attachment extends Identity {
 
     private static final long serialVersionUID = -8412370153231420105L;
 

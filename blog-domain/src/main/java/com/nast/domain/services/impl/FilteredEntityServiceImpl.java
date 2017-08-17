@@ -1,6 +1,6 @@
 package com.nast.domain.services.impl;
 
-import com.nast.domain.entities.base.PersistedEntity;
+import com.nast.domain.entities.base.Identity;
 import com.nast.domain.filters.Filter;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-public abstract class FilteredEntityServiceImpl<E extends PersistedEntity, F extends Filter> extends
+public abstract class FilteredEntityServiceImpl<E extends Identity, F extends Filter> extends
         AbstractCrudServiceImpl<E> {
 
     @Autowired

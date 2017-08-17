@@ -20,6 +20,7 @@
         <spring.data.version>1.11.1.RELEASE</spring.data.version>
         <org.aspectj.version>1.7.4</org.aspectj.version>
         <hibernate.version>5.2.9.Final</hibernate.version>
+        <selma.version>1.0</selma.version>
         <project.source.version>1.8</project.source.version>
         <junit.version>4.12</junit.version>
         <querydsl.version>4.1.4</querydsl.version>
@@ -103,6 +104,18 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
                 <version>${hibernate.version}</version>
+            </dependency>
+
+            <!--Dto mapping-->
+            <dependency>
+                <groupId>fr.xebia.extras</groupId>
+                <artifactId>selma</artifactId>
+                <version>${selma.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.xebia.extras</groupId>
+                <artifactId>selma-processor</artifactId>
+                <version>${selma.version}</version>
             </dependency>
 
             <!--todo: посмотреть альтернативы-->

@@ -1,6 +1,6 @@
 package com.nast.domain.services;
 
-import com.nast.domain.entities.base.PersistedEntity;
+import com.nast.domain.entities.base.Identity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
  *
  * @param <E> entity type
  */
-public interface BaseEntityService<E extends PersistedEntity> {
+public interface CrudService<E extends Identity> {
 
     /**
      * Save entity

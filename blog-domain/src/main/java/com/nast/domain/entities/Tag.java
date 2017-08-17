@@ -1,12 +1,12 @@
 package com.nast.domain.entities;
 
-import com.nast.domain.entities.base.PersistedEntity;
+import com.nast.domain.entities.base.Identity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Tag extends PersistedEntity {
+public class Tag extends Identity {
 
     private static final long serialVersionUID = -8593531398845228665L;
 

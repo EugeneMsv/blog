@@ -24,6 +24,16 @@
         </dependency>
 
         <dependency>
+            <groupId>fr.xebia.extras</groupId>
+            <artifactId>selma</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>fr.xebia.extras</groupId>
+            <artifactId>selma-processor</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
