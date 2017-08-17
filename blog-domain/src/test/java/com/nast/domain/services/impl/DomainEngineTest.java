@@ -29,7 +29,7 @@ public class DomainEngineTest {
             checkTable(metaData, "post_tag");
             checkTable(metaData, "post_attachment");
             checkTable(metaData, "attachment");
-            checkTable(metaData, "postregister");
+            checkTable(metaData, "post_register");
             checkTable(metaData, "commentary");
             checkTable(metaData, "post");
             checkTable(metaData, "tag");
@@ -39,14 +39,18 @@ public class DomainEngineTest {
     }
 
     private void checkTable(DatabaseMetaData metaData, String tableName) throws SQLException {
-        ResultSet tables = metaData.getTables(null, null, tableName, null);
-        if (!tables.next()) {
-            tables = metaData.getTables(null, null, tableName.toUpperCase(), null);
-            assertTrue(tables.next());
-            assertFalse(tables.next());
-        } else {
-            assert true;
-            assertFalse(tables.next());
+
+        try (ResultSet tables = metaData.getTables(null, null, tableName, null)) {
+            if (!tables.next()) {
+                try (ResultSet upperCaseTables =
+                             metaData.getTables(null, null, tableName.toUpperCase(), null)) {
+                    assertTrue(upperCaseTables.next());
+                    assertFalse(upperCaseTables.next());
+                }
+            } else {
+                assert true;
+                assertFalse(tables.next());
+            }
         }
 
     }

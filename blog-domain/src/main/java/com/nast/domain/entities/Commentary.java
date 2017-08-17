@@ -6,17 +6,22 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "commentary")
 public class Commentary extends Identity {
 
     private static final long serialVersionUID = -2612882182166770506L;
 
-    @Column(nullable = false)
+    @Column(name = "author", nullable = false)
     private String author;
 
+    // TODO: 17.08.2017 будет проблема с десериализацией в dto для jackson
+    @Column(name = "created_time")
     private LocalDateTime createdTime;
 
+    @Column(name = "message")
     private String message;
 
+    @Column(name = "email")
     private String email;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -54,7 +59,6 @@ public class Commentary extends Identity {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     public PostRegister getPostRegister() {
         return postRegister;

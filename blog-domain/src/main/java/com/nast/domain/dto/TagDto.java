@@ -4,6 +4,8 @@ import com.nast.domain.dto.base.IdentityDto;
 
 public class TagDto extends IdentityDto {
 
+    private static final long serialVersionUID = -3884735562187892353L;
+    
     private String code;
 
     private String description;

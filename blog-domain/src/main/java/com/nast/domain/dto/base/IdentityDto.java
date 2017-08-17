@@ -1,6 +1,8 @@
 package com.nast.domain.dto.base;
 
-public abstract class IdentityDto {
+import java.io.Serializable;
+
+public abstract class IdentityDto implements Serializable {
 
     private Long id;
 

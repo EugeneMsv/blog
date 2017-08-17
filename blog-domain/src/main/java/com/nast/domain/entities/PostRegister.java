@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "post_register")
 public class PostRegister extends Identity {
 
     private static final long serialVersionUID = -1207026720655304124L;
@@ -15,24 +16,29 @@ public class PostRegister extends Identity {
      * Постр регистр является владельцем ссылки на пост
      */
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "postId", unique = true, nullable = false)
+    @JoinColumn(unique = true, nullable = false)
     private Post post;
 
+    @Column(name = "preview")
     private String preview;
 
+    @Column(name = "likes")
     private Long likes;
 
+    @Column(name = "views")
     private Long views;
 
+    @Column(name = "comments_num")
     private Long commentsNum;
 
+    @Column(name = "created_time")
     private LocalDateTime createdTime;
 
     @Lob
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "meta_info", columnDefinition = "TEXT")
     private String metaInfo;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Commentary> commentaries;
 
 

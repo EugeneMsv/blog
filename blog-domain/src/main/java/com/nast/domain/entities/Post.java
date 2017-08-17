@@ -3,37 +3,39 @@ package com.nast.domain.entities;
 import com.nast.domain.entities.base.Identity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "post")
 public class Post extends Identity {
 
     private static final long serialVersionUID = -8786471757326098213L;
 
-    @Column(unique = true, length = 100)
+    @Column(name = "code", unique = true, length = 100)
     private String code;
 
-    @Column(nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
     @Lob
-    @Column(nullable = false, columnDefinition = "LONGTEXT")
+    @Column(name = "text", nullable = false, columnDefinition = "LONGTEXT")
     private String text;
 
     @ManyToMany
     private List<Tag> tags;
 
-    @Column(nullable = false)
+    @Column(name = "author", nullable = false)
     private String author;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Attachment> attachments;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "state", nullable = false)
     private PostState state;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "post")
     private PostRegister postRegister;
 
     public String getCode() {
@@ -61,7 +63,7 @@ public class Post extends Identity {
     }
 
     public List<Tag> getTags() {
-        return tags;
+        return tags != null ? tags : new ArrayList<>();
     }
 
     public void setTags(List<Tag> tags) {
@@ -77,7 +79,7 @@ public class Post extends Identity {
     }
 
     public List<Attachment> getAttachments() {
-        return attachments;
+        return attachments != null ? attachments : new ArrayList<>();
     }
 
     public void setAttachments(List<Attachment> attachments) {

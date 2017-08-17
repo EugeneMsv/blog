@@ -4,15 +4,18 @@ import com.nast.domain.entities.base.Identity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tag")
 public class Tag extends Identity {
 
     private static final long serialVersionUID = -8593531398845228665L;
 
-    @Column(unique = true, nullable = false, length = 20)
+    @Column(name = "code", unique = true, nullable = false, length = 20)
     private String code;
 
+    @Column(name = "description")
     private String description;
 
     public Tag() {

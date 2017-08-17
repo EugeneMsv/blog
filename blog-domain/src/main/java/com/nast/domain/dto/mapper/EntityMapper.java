@@ -2,7 +2,6 @@ package com.nast.domain.dto.mapper;
 
 import com.nast.domain.dto.base.IdentityDto;
 import com.nast.domain.entities.base.Identity;
-import fr.xebia.extras.selma.Mapper;
 
 /**
  * Base interface for all mappers between Dto and domain entities

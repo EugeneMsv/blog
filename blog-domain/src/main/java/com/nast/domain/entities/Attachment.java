@@ -5,16 +5,19 @@ import com.nast.domain.entities.base.Identity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "attachment")
 public class Attachment extends Identity {
 
     private static final long serialVersionUID = -8412370153231420105L;
 
     @Lob
-    @Column(length = 500000)
+    @Column(name = "file", length = 500000)
     private byte[] file;
 
+    @Column(name = "description")
     private String description;
 
     public byte[] getFile() {
