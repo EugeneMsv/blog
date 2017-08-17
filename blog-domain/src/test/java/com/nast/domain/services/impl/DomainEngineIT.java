@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:test-context.xml")
-public class DomainEngineTest {
+public class DomainEngineIT {
 
     @Autowired
     private DataSource dataSource;

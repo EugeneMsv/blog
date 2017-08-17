@@ -27,8 +27,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:test-context.xml")
-public class TagServiceImplTest {
-
+public class TagServiceImplIT {
 
     @Autowired
     private TagService tagService;
