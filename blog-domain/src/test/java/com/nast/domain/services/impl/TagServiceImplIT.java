@@ -1,40 +1,39 @@
 package com.nast.domain.services.impl;
 
 import com.nast.domain.entities.Tag;
-import com.nast.domain.filters.TagFilter;
 import com.nast.domain.services.TagService;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.querydsl.QPageRequest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.function.Consumer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static com.nast.domain.utils.AssertionUtils.*;
+import static com.nast.domain.utils.DomainEntityBuilder.buildRandomString;
+import static com.nast.domain.utils.DomainEntityBuilder.buildRandomTag;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:test-context.xml")
+@Transactional
+@Rollback
 public class TagServiceImplIT {
 
     @Autowired
     private TagService tagService;
-
-    @Before
-    public void setUp() throws Exception {
-    }
 
     @After
     public void end() {
@@ -43,23 +42,96 @@ public class TagServiceImplIT {
 
     @Test
     public void saveTag_Success() throws Exception {
-        Tag saveTarget = new Tag();
-        saveTarget.setDescription("Test description");
-        saveTarget.setCode("19909");
-        Tag saved = tagService.save(saveTarget);
-        assertFalse(saved.isNew());
+        Tag randTag = buildRandomTag();
+        Tag saved = tagService.save(randTag);
+        assertPersist(saved);
+        assertFieldsEquals(randTag, saved);
     }
 
     @Test
-    public void doubleSaveTag_Exception() throws Exception {
+    @Ignore
+    // TODO: 17.08.2017 имеет смысл для dto  т.к.  здесь обхект по одной ссылке
+    public void save_UpdateAfterFoundSaved_Success() throws Exception {
+        //save
+        Tag randTag = buildRandomTag();
+        Tag saved = tagService.save(randTag);
+        assertPersist(saved);
+        assertFieldsEquals(randTag, saved);
+        //find
+        Optional<Tag> optTag = tagService.findOne(saved.getId());
+        Tag found = optTag.get();
+        assertNotNull(found);
+        assertPersist(found);
+        assertFieldsEquals(saved, found);
+        //update
+        found.setDescription(buildRandomString());
 
-        Optional<Tag> tag = tagService.findOne(new TagFilter("19909"));
-        Tag savedOrUpdated = tag.map(tag1 -> {
-            tag1.setDescription("Current Description" + LocalDateTime.now());
-            return tagService.save(tag1);
-        }).orElseGet(() -> tagService.save(new Tag("19909", "Test description")));
+        Tag updated = tagService.save(found);
 
-        assertFalse(savedOrUpdated.isNew());
+        assertReflectionEquals(randTag, updated, "description");
+    }
+
+
+    @Test
+    public void findOne_ById_Success() throws Exception {
+        Tag randTag = buildRandomTag();
+        Tag saved = tagService.save(randTag);
+        assertFieldsEquals(randTag, saved);
+        Optional<Tag> optTag = tagService.findOne(saved.getId());
+        Tag found = optTag.get();
+        assertFieldsEquals(saved, found);
+    }
+
+    @Test
+    public void delete_AfterSaveById_Success() throws Exception {
+        assertFalse(tagService.exists());
+        //save
+        Tag randTag = buildRandomTag();
+        Tag saved = tagService.save(randTag);
+        assertFieldsEquals(randTag, saved);
+
+        assertTrue(tagService.exists());
+        //delete
+        tagService.delete(saved.getId());
+        assertFalse(tagService.exists());
+    }
+
+
+    @Test
+    public void findAll_TwoObjectsOnOnePage_Success() throws Exception {
+        assertFalse(tagService.exists());
+        //save
+        Tag randTag1 = buildRandomTag();
+        Tag saved1 = tagService.save(randTag1);
+        assertFieldsEquals(randTag1, saved1);
+
+        Tag randTag2 = buildRandomTag();
+        Tag saved2 = tagService.save(randTag2);
+        assertFieldsEquals(randTag2, saved2);
+
+        Page<Tag> page = tagService.findAll(new PageRequest(0, 10));
+        assertFalse(page.hasNext());
+        assertThat(Arrays.asList(saved1, saved2), is(page.getContent()));
+    }
+
+    @Test
+    public void findAll_TwoObjectsOnTwoPage_Success() throws Exception {
+        assertFalse(tagService.exists());
+        //save
+        Tag randTag1 = buildRandomTag();
+        Tag saved1 = tagService.save(randTag1);
+        assertFieldsEquals(randTag1, saved1);
+
+        Tag randTag2 = buildRandomTag();
+        Tag saved2 = tagService.save(randTag2);
+        assertFieldsEquals(randTag2, saved2);
+
+        Page<Tag> page1 = tagService.findAll(new PageRequest(0, 1));
+        Page<Tag> page2 = tagService.findAll(new PageRequest(0, 2));
+        assertTrue(page1.hasNext());
+        assertFalse(page2.hasNext());
+        assertTrue(page1.getContent().contains(saved1) || page2.getContent().contains(saved1));
+        assertTrue(page1.getContent().contains(saved2) || page2.getContent().contains(saved2));
     }
 
 
@@ -69,28 +141,13 @@ public class TagServiceImplIT {
         long allCalls = 0;
         int cycles = 300000;
         for (int i = 0; i < cycles; i++) {
-            Tag saveTarget = new Tag(UUID.randomUUID().toString().substring(0, 20), UUID.randomUUID().toString().substring(0, 20));
+            Tag saveTarget = new Tag(UUID.randomUUID().toString().substring(0, 20),
+                    UUID.randomUUID().toString().substring(0, 20));
             Instant start = Instant.now();
             tagService.save(saveTarget);
             allCalls += Duration.between(start, Instant.now()).getNano();
         }
         System.out.println("Average time " + allCalls / cycles);
-    }
-
-
-    @Test
-    public void testQueryPredicate() {
-        Tag saveTarget = new Tag();
-        saveTarget.setDescription("Test description");
-        saveTarget.setCode("19909");
-        Tag saved = tagService.save(saveTarget);
-        TagFilter tagFilter = new TagFilter();
-        tagFilter.setCode("199");
-        Page<Tag> tagsPage = tagService.findAll(tagFilter, new QPageRequest(0, 20));
-        assertEquals(1, tagsPage.getNumberOfElements());
-        for (Tag tag : tagsPage) {
-            assertEquals(saved, tag);
-        }
     }
 
 }

@@ -13,7 +13,7 @@ import java.util.Optional;
  * @param <T> entity type
  * @param <F> filter type
  */
-public interface FilteredEntityService<T extends Identity, F extends Filter> extends CrudService<T> {
+public interface FilteredEntityService<E extends Identity, F extends Filter> extends CrudService<E> {
 
     /**
      * Check for existence in persist storage by filter
@@ -29,7 +29,7 @@ public interface FilteredEntityService<T extends Identity, F extends Filter> ext
      * @param filter search condition
      * @return optional of entity, empty if there is no such entity
      */
-    Optional<T> findOne(F filter);
+    Optional<E> findOne(F filter);
 
     /**
      * Find all entities by filter with given page
@@ -38,6 +38,6 @@ public interface FilteredEntityService<T extends Identity, F extends Filter> ext
      * @param pageable page descriptor
      * @return page corresponding for pageable and filter
      */
-    Page<T> findAll(F filter, Pageable pageable);
+    Page<E> findAll(F filter, Pageable pageable);
 
 }

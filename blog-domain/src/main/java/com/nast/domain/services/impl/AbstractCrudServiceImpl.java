@@ -1,7 +1,6 @@
 package com.nast.domain.services.impl;
 
 import com.nast.domain.entities.base.Identity;
-import com.nast.domain.entities.base.QIdentity;
 import com.nast.domain.repositories.PersistedEntityRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +40,6 @@ public abstract class AbstractCrudServiceImpl<E extends Identity> {
 
     @Transactional(readOnly = true)
     public Page<E> findAll(Pageable pageable) {
-        return getRepository().findAll(QIdentity.identity.isNotNull(), pageable);
+        return getRepository().findAll(pageable);
     }
 }

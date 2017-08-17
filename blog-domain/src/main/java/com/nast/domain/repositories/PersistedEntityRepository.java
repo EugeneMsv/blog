@@ -1,6 +1,8 @@
 package com.nast.domain.repositories;
 
 import com.nast.domain.entities.base.Identity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.Repository;
 
@@ -81,5 +83,13 @@ public interface PersistedEntityRepository<T extends Identity>
      * @return an {@link Optional} of single entity matching the given {@link Long}.
      */
     Optional<T> findOne(Long id);
+
+    /**
+     * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object.
+     *
+     * @param pageable
+     * @return a page of entities
+     */
+    Page<T> findAll(Pageable pageable);
 
 }
