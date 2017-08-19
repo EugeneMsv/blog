@@ -42,4 +42,16 @@ public class Tag extends Identity {
         this.description = description;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        return o != null && o instanceof Tag && getId().equals(((Identity) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
 }

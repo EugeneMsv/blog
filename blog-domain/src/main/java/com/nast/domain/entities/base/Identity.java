@@ -32,8 +32,10 @@ public abstract class Identity implements Persistable<Long> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        return o != null && getClass() == o.getClass() && id.equals(((Identity) o).id);
+        if (this == o) {
+            return true;
+        }
+        return o != null && o instanceof Identity && id.equals(((Identity) o).id);
     }
 
     @Override
@@ -43,7 +45,7 @@ public abstract class Identity implements Persistable<Long> {
 
     @Override
     public String toString() {
-        try {
+       /* try {
             // TODO: 26.07.2017 Временно, затем убрать рефлексию
             StringBuilder sb = new StringBuilder(getClass().getSimpleName());
             sb.append("{id=").append(id).append(",");
@@ -59,7 +61,9 @@ public abstract class Identity implements Persistable<Long> {
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException("Failed to print " + getClass());
         }
-
+*/
+        StringBuilder sb = new StringBuilder("[");
+        return sb.append(getClass().getSimpleName()).append("{id=").append(id).append("}]").toString();
 
     }
 }

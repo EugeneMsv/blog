@@ -1,5 +1,6 @@
 package com.nast.domain.utils;
 
+import com.nast.domain.entities.Commentary;
 import com.nast.domain.entities.Tag;
 
 import java.util.Random;
@@ -27,5 +28,12 @@ public class DomainEntityBuilder {
 
     public static Tag buildRandomTag() {
         return new Tag(buildRandomString(20), buildRandomString());
+    }
+
+    public static Commentary buildRandomCommentary() {
+        Commentary commentary = new Commentary(buildRandomString(10));
+        commentary.setMessage(buildRandomString());
+        commentary.setEmail(buildRandomString());
+        return commentary;
     }
 }

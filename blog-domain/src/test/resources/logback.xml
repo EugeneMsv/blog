@@ -10,7 +10,7 @@
 
     <logger name="com.nast" level="warn" />
 
-    <root level="warn">
+    <root level="debug">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

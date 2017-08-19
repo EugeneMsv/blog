@@ -28,6 +28,14 @@ public class Commentary extends Identity {
     @JoinColumn(name = "postRegister", nullable = false)
     private PostRegister postRegister;
 
+    public Commentary() {
+    }
+
+    public Commentary(String author) {
+        this.author = author;
+        this.createdTime = LocalDateTime.now();
+    }
+
     public String getAuthor() {
         return author;
     }
@@ -66,5 +74,18 @@ public class Commentary extends Identity {
 
     public void setPostRegister(PostRegister postRegister) {
         this.postRegister = postRegister;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        return o != null && o instanceof Commentary && getId().equals(((Identity) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
     }
 }

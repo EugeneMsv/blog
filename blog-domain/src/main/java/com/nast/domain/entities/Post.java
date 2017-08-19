@@ -35,7 +35,7 @@ public class Post extends Identity {
     @Column(name = "state", nullable = false)
     private PostState state;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "post")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "post")
     private PostRegister postRegister;
 
     public String getCode() {
@@ -63,7 +63,10 @@ public class Post extends Identity {
     }
 
     public List<Tag> getTags() {
-        return tags != null ? tags : new ArrayList<>();
+        if (tags == null) {
+            tags = new ArrayList<>();
+        }
+        return tags;
     }
 
     public void setTags(List<Tag> tags) {
@@ -79,7 +82,10 @@ public class Post extends Identity {
     }
 
     public List<Attachment> getAttachments() {
-        return attachments != null ? attachments : new ArrayList<>();
+        if (attachments == null) {
+            attachments = new ArrayList<>();
+        }
+        return attachments;
     }
 
     public void setAttachments(List<Attachment> attachments) {
@@ -100,5 +106,18 @@ public class Post extends Identity {
 
     public void setPostRegister(PostRegister postRegister) {
         this.postRegister = postRegister;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        return o != null && o instanceof Post && getId().equals(((Identity) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
     }
 }

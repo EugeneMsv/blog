@@ -15,8 +15,7 @@ public class PostRegister extends Identity {
     /**
      * Постр регистр является владельцем ссылки на пост
      */
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(unique = true, nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Post post;
 
     @Column(name = "preview")
@@ -104,5 +103,18 @@ public class PostRegister extends Identity {
 
     public void setCommentaries(List<Commentary> commentaries) {
         this.commentaries = commentaries;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        return o != null && o instanceof PostRegister && getId().equals(((Identity) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
     }
 }

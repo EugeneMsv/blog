@@ -1,18 +1,21 @@
 package com.nast.domain.services.impl;
 
+import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseOperation;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.nast.domain.entities.Tag;
 import com.nast.domain.services.TagService;
-import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -28,20 +31,17 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:test-context.xml")
-@Transactional
-@Rollback
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
+        DirtiesContextTestExecutionListener.class,
+        TransactionDbUnitTestExecutionListener.class})
+@DatabaseSetup(value = "/preset/clean.xml", type = DatabaseOperation.DELETE_ALL)
 public class TagServiceImplIT {
 
     @Autowired
     private TagService tagService;
 
-    @After
-    public void end() {
-        tagService.deleteAll();
-    }
-
     @Test
-    public void saveTag_Success() throws Exception {
+    public void test_save_Tag_Success() throws Exception {
         Tag randTag = buildRandomTag();
         Tag saved = tagService.save(randTag);
         assertPersist(saved);
@@ -51,7 +51,7 @@ public class TagServiceImplIT {
     @Test
     @Ignore
     // TODO: 17.08.2017 имеет смысл для dto  т.к.  здесь обхект по одной ссылке
-    public void save_UpdateAfterFoundSaved_Success() throws Exception {
+    public void test_save_UpdateAfterFoundSaved_Success() throws Exception {
         //save
         Tag randTag = buildRandomTag();
         Tag saved = tagService.save(randTag);
@@ -73,7 +73,7 @@ public class TagServiceImplIT {
 
 
     @Test
-    public void findOne_ById_Success() throws Exception {
+    public void test_findOne_ById_Success() throws Exception {
         Tag randTag = buildRandomTag();
         Tag saved = tagService.save(randTag);
         assertFieldsEquals(randTag, saved);
@@ -83,7 +83,7 @@ public class TagServiceImplIT {
     }
 
     @Test
-    public void delete_AfterSaveById_Success() throws Exception {
+    public void test_delete_AfterSaveById_Success() throws Exception {
         assertFalse(tagService.exists());
         //save
         Tag randTag = buildRandomTag();
@@ -98,7 +98,7 @@ public class TagServiceImplIT {
 
 
     @Test
-    public void findAll_TwoObjectsOnOnePage_Success() throws Exception {
+    public void test_findAll_TwoObjectsOnOnePage_Success() throws Exception {
         assertFalse(tagService.exists());
         //save
         Tag randTag1 = buildRandomTag();
@@ -115,7 +115,7 @@ public class TagServiceImplIT {
     }
 
     @Test
-    public void findAll_TwoObjectsOnTwoPage_Success() throws Exception {
+    public void test_findAll_TwoObjectsOnTwoPage_Success() throws Exception {
         assertFalse(tagService.exists());
         //save
         Tag randTag1 = buildRandomTag();
@@ -137,7 +137,7 @@ public class TagServiceImplIT {
 
     @Test
     @Ignore
-    public void callProfilingTime() throws Exception {
+    public void test_callProfilingTime() throws Exception {
         long allCalls = 0;
         int cycles = 300000;
         for (int i = 0; i < cycles; i++) {
