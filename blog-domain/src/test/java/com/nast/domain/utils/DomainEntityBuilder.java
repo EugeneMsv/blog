@@ -36,4 +36,8 @@ public class DomainEntityBuilder {
         commentary.setEmail(buildRandomString());
         return commentary;
     }
+
+    public static PostRegisterBuilder getPostRegisterBuilder() {
+        return new PostRegisterBuilder();
+    }
 }

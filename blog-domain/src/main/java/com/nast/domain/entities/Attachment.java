@@ -2,10 +2,7 @@ package com.nast.domain.entities;
 
 import com.nast.domain.entities.base.Identity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "attachment")
@@ -22,6 +19,9 @@ public class Attachment extends Identity {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Post post;
 
     public byte[] getFile() {
         return file;
@@ -45,6 +45,14 @@ public class Attachment extends Identity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     @Override

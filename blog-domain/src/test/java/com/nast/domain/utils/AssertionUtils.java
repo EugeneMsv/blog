@@ -51,9 +51,9 @@ public class AssertionUtils {
                 .append(expected.getCreatedTime(), actual.getCreatedTime())
                 .append(expected.getEmail(), actual.getEmail())
                 .append(expected.getMessage(), actual.getMessage())
-                .append(expected.getPostRegister(), actual.getPostRegister())
                 .isEquals();
         throwAssertionError(equals);
+        assertFieldsEquals(expected.getPostRegister(), actual.getPostRegister());
     }
 
     public static void assertFieldsEquals(Post expected, Post actual) {
@@ -63,9 +63,7 @@ public class AssertionUtils {
                 .append(expected.getState(), actual.getState())
                 .append(expected.getText(), actual.getText())
                 .append(expected.getTitle(), actual.getTitle())
-                .append(expected.getPostRegister(), actual.getPostRegister())
-                .append(expected.getTags(), actual.getTags())
-                .append(expected.getAttachments(), actual.getAttachments())
+//                .append(expected.getTags(), actual.getTags())
                 .isEquals();
         throwAssertionError(equals);
     }
@@ -78,9 +76,8 @@ public class AssertionUtils {
                 .append(expected.getLikes(), actual.getLikes())
                 .append(expected.getMetaInfo(), actual.getMetaInfo())
                 .append(expected.getViews(), actual.getViews())
-                .append(expected.getPost(), actual.getPost())
-                .append(expected.getCommentaries(), actual.getCommentaries())
                 .isEquals();
         throwAssertionError(equals);
+        assertFieldsEquals(expected.getPost(), actual.getPost());
     }
 }

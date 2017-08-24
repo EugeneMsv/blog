@@ -1,4 +1,6 @@
 package com.nast.domain.filters;
 
-public interface Filter {
+import java.io.Serializable;
+
+public interface Filter extends Serializable {
 }

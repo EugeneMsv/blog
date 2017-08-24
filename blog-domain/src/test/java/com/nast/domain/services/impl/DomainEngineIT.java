@@ -27,7 +27,6 @@ public class DomainEngineIT {
         try (Connection connection = dataSource.getConnection()) {
             DatabaseMetaData metaData = connection.getMetaData();
             checkTable(metaData, "post_tag");
-            checkTable(metaData, "post_attachment");
             checkTable(metaData, "attachment");
             checkTable(metaData, "post_register");
             checkTable(metaData, "commentary");

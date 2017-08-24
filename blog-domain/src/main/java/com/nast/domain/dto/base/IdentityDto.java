@@ -20,7 +20,7 @@ public abstract class IdentityDto implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof IdentityDto)) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 

@@ -25,7 +25,6 @@ public class Commentary extends Identity {
     private String email;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postRegister", nullable = false)
     private PostRegister postRegister;
 
     public Commentary() {

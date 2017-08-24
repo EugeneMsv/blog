@@ -28,9 +28,6 @@ public class Post extends Identity {
     @Column(name = "author", nullable = false)
     private String author;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Attachment> attachments;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable = false)
     private PostState state;
@@ -79,17 +76,6 @@ public class Post extends Identity {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public List<Attachment> getAttachments() {
-        if (attachments == null) {
-            attachments = new ArrayList<>();
-        }
-        return attachments;
-    }
-
-    public void setAttachments(List<Attachment> attachments) {
-        this.attachments = attachments;
     }
 
     public PostState getState() {

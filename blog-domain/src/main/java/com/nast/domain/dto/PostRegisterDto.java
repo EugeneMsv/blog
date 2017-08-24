@@ -1,49 +1,32 @@
-package com.nast.domain.entities;
+package com.nast.domain.dto;
 
-import com.nast.domain.entities.base.Identity;
+import com.nast.domain.dto.base.IdentityDto;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
-import static javax.persistence.CascadeType.*;
+public class PostRegisterDto extends IdentityDto {
 
-@Entity
-@Table(name = "post_register")
-public class PostRegister extends Identity {
+    private static final long serialVersionUID = -6241819091243049677L;
 
-    private static final long serialVersionUID = -1207026720655304124L;
+    private PostDto post;
 
-    /**
-     * Пост регистр является владельцем ссылки на пост
-     */
-    @OneToOne(fetch = FetchType.LAZY, cascade = {MERGE, DETACH, REMOVE, REFRESH,}, orphanRemoval = true)
-    private Post post;
-
-    @Column(name = "preview")
     private String preview;
 
-    @Column(name = "likes")
     private Long likes;
 
-    @Column(name = "views")
     private Long views;
 
-    @Column(name = "comments_num")
     private Long commentsNum;
 
-    @Column(name = "created_time")
     private LocalDateTime createdTime;
 
-    @Lob
-    @Column(name = "meta_info", columnDefinition = "TEXT")
     private String metaInfo;
 
-    public Post getPost() {
+    public PostDto getPost() {
         return post;
     }
 
-    public void setPost(Post post) {
+    public void setPost(PostDto post) {
         this.post = post;
     }
 
@@ -93,18 +76,5 @@ public class PostRegister extends Identity {
 
     public void setMetaInfo(String metaInfo) {
         this.metaInfo = metaInfo;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        return o != null && o instanceof PostRegister && getId().equals(((Identity) o).getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getId().hashCode();
     }
 }
