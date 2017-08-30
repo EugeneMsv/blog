@@ -13,7 +13,7 @@ public interface EntityMapper<E extends Identity, D extends IdentityDto> {
 
     E mapToEntity(D dto);
 
-    E updateEntityWithDto(E entity, D dto);
+    E updateEntityWithDto(D dto, E entity);
 
     D mapToDto(E entity);
 }

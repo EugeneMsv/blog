@@ -32,7 +32,7 @@ public abstract class AbstractCrudController<E extends Identity, D extends Ident
     }
 
     private E updateEntityByDto(E entity, D dto) {
-        return getEntityMapper().updateEntityWithDto(entity, dto);
+        return getEntityMapper().updateEntityWithDto(dto, entity);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
